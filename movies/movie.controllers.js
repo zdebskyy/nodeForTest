@@ -13,13 +13,7 @@ class MovieControllers {
 
     await newMovie.save();
 
-    res.status(201).send({
-      id: newMovie._id,
-      name: newMovie.movieName,
-      date: newMovie.productionDate,
-      format,
-      actorsList,
-    });
+    res.status(201).json(newMovie);
   }
 
   async removeMovieFromCollection(req, res) {
