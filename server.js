@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const movieRouter = require("./movies/movies.router");
@@ -38,6 +39,7 @@ module.exports = class movieServer {
     this.server.use(express.json());
     this.server.use(morgan("dev"));
     console.log("middlewares initialized");
+    this.server.use(cors({}));
   }
 
   errorHandling() {
