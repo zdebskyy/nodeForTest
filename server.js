@@ -5,7 +5,7 @@ const morgan = require("morgan");
 const movieRouter = require("./movies/movies.router");
 const { NotFoundError } = require("./utils/errorHandler");
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 const url = process.env.MONGO_URL;
 
 module.exports = class movieServer {
