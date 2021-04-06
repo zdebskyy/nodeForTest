@@ -56,6 +56,11 @@ class MovieControllers {
     const result = await movieModel.getInfoAboutMovie(id);
     res.status(200).json(result);
   }
+
+  async allData(req, res) {
+    const result = await movieModel.find({});
+    res.status(200).json(result);
+  }
 }
 
 module.exports = new MovieControllers();
