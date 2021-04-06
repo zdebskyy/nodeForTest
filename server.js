@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const movieRouter = require("./movies/movies.router");
+const { NotFoundError } = require("./utils/errorHandler");
 
 const port = process.env.PORT || 8080;
 const url = process.env.MONGO_URL;
@@ -19,7 +20,7 @@ module.exports = class movieServer {
     this.initMiddlwares();
     this.initRoutes();
     await this.initDatabase();
-    // this.errorHandling();
+    this.errorHandling();
     this.startListening();
   }
 
@@ -39,20 +40,15 @@ module.exports = class movieServer {
     console.log("middlewares initialized");
   }
 
-  //   errorHandling() {
-  //     let status = 500;
-  //     this.server.use((error, req, res, next) => {
-  //       if (
-  //         error instanceof ConflictError ||
-  //         error instanceof UnauthorizedError ||
-  //         error instanceof JoiValidationError ||
-  //         error instanceof NotFoundError
-  //       ) {
-  //         status = error.status;
-  //       }
-  //       return res.status(status).send({ message: error.message });
-  //     });
-  //   }
+  errorHandling() {
+    let status = 500;
+    this.server.use((error, req, res, next) => {
+      if (error instanceof NotFoundError) {
+        status = error.status;
+      }
+      return res.status(status).send({ message: error.message });
+    });
+  }
 
   initRoutes() {
     // input routers here

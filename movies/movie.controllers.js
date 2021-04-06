@@ -1,4 +1,5 @@
 const movieModel = require("./movie.model");
+const { NotFoundError } = require("../utils/errorHandler");
 
 class MovieControllers {
   async addMovie(req, res) {
@@ -31,7 +32,7 @@ class MovieControllers {
     const { name } = req.query;
     const result = await movieModel.findMovieByName(name);
     if (result.length < 1) {
-      res.status(400).send({ message: "Not found" });
+      throw new NotFoundError("Not found");
     }
     res.status(200).json(result);
   }
@@ -40,7 +41,7 @@ class MovieControllers {
     const { name } = req.query;
     const result = await movieModel.findByActorName(name);
     if (result.length < 1) {
-      res.status(400).send({ message: "Not found" });
+      throw new NotFoundError("Not found");
     }
     res.status(200).json(result);
   }
