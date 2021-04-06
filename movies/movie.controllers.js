@@ -23,7 +23,7 @@ class MovieControllers {
   }
 
   async getByName(req, res) {
-    const { name } = req.query;
+    const { name } = req.params;
     const result = await movieModel.findMovieByName(name);
     if (result.length < 1) {
       throw new NotFoundError("Not found");
@@ -32,7 +32,7 @@ class MovieControllers {
   }
 
   async getByActorName(req, res) {
-    const { name } = req.query;
+    const { name } = req.params;
     const result = await movieModel.findByActorName(name);
     if (result.length < 1) {
       throw new NotFoundError("Not found");
