@@ -21,7 +21,7 @@ movieRouter.delete(
 movieRouter.get("/about-movie/:id", asyncWrapper(movieDetails));
 movieRouter.get("/", asyncWrapper(allData));
 movieRouter.get("/sort-by-name", asyncWrapper(getSorted));
-movieRouter.get("/find-by-name", asyncWrapper(getByName));
-movieRouter.get("/find-by-actor", asyncWrapper(getByActorName));
+movieRouter.get("/find-by-name/:name", asyncWrapper(getByName));
+movieRouter.get("/find-by-actor/:name", asyncWrapper(getByActorName));
 
 module.exports = movieRouter;
