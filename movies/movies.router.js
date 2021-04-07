@@ -6,7 +6,7 @@ const {
   getByName,
   getByActorName,
   getSorted,
-  getUploadetData,
+  getUploadedData,
   allData,
 } = require("./movie.controllers");
 const { validateMovieAdd } = require("./validation/movieFieldsValidation");
@@ -22,6 +22,6 @@ movieRouter.get("/", asyncWrapper(allData));
 movieRouter.get("/sort-by-name", asyncWrapper(getSorted));
 movieRouter.get("/find-by-name/:name", asyncWrapper(getByName));
 movieRouter.get("/find-by-actor/:name", asyncWrapper(getByActorName));
-movieRouter.post("/upload", asyncWrapper(getUploadetData));
+movieRouter.post("/upload", asyncWrapper(getUploadedData));
 
 module.exports = movieRouter;

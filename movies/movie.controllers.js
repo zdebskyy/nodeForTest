@@ -46,12 +46,9 @@ class MovieControllers {
     res.status(200).json(result);
   }
 
-  async getUploadetData(req, res) {
-    const data = fs.readFile(err, req.body, "utf8");
-    console.log(data);
-    console.log(data.err);
-
-    res.status(200).send({ message: "ok" });
+  async getUploadedData(req, res) {
+    console.log(req);
+    res.status(200).json({ message: "ok" });
   }
 
   async allData(req, res) {
