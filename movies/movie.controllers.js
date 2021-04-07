@@ -47,12 +47,14 @@ class MovieControllers {
   }
 
   async getUploadedData(req, res) {
-    console.log(req);
-    res.status(200).json({ message: "ok" });
+    console.log(req.file);
+
+    res.status(200).send({ message: "OK LOCAL" });
   }
 
   async allData(req, res) {
     const result = await movieModel.find({});
+
     res.status(200).json(result);
   }
 }
