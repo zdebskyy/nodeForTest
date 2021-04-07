@@ -6,7 +6,7 @@ const {
   getByName,
   getByActorName,
   getSorted,
-  movieDetails,
+  getUploadetData,
   allData,
 } = require("./movie.controllers");
 const { validateMovieAdd } = require("./validation/movieFieldsValidation");
@@ -18,10 +18,10 @@ movieRouter.delete(
   "/remove-movie/:id",
   asyncWrapper(removeMovieFromCollection)
 );
-movieRouter.get("/about-movie/:id", asyncWrapper(movieDetails));
 movieRouter.get("/", asyncWrapper(allData));
 movieRouter.get("/sort-by-name", asyncWrapper(getSorted));
 movieRouter.get("/find-by-name/:name", asyncWrapper(getByName));
 movieRouter.get("/find-by-actor/:name", asyncWrapper(getByActorName));
+movieRouter.post("/upload", asyncWrapper(getUploadetData));
 
 module.exports = movieRouter;

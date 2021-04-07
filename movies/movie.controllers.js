@@ -1,5 +1,6 @@
 const movieModel = require("./movie.model");
 const { NotFoundError } = require("../utils/errorHandler");
+const fs = require("fs");
 
 class MovieControllers {
   async addMovie(req, res) {
@@ -45,10 +46,12 @@ class MovieControllers {
     res.status(200).json(result);
   }
 
-  async movieDetails(req, res) {
-    const { id } = req.params;
-    const result = await movieModel.getInfoAboutMovie(id);
-    res.status(200).json(result);
+  async getUploadetData(req, res) {
+    const data = fs.readFile(err, req.body, "utf8");
+    console.log(data);
+    console.log(data.err);
+
+    res.status(200).send({ message: "ok" });
   }
 
   async allData(req, res) {
