@@ -49,7 +49,7 @@ class MovieControllers {
   async getUploadedData(req, res) {
     console.log(req.file);
 
-    res.status(200).send({ message: "OK LOCAL" });
+    res.status(200).json({ message: "OK" });
   }
 
   async allData(req, res) {
