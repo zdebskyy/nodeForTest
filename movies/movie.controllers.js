@@ -2,6 +2,11 @@ const movieModel = require("./movie.model");
 const { NotFoundError } = require("../utils/errorHandler");
 const fs = require("fs");
 
+// fs.readFile("uploads/1617810513461.txt", "utf8", function (err, contents) {
+//   if (err) throw err;
+//   console.log(contents.split("-"));
+// });
+
 class MovieControllers {
   async addMovie(req, res) {
     const { movieName, productionDate, format, actorsList } = req.body;

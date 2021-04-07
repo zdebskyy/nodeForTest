@@ -23,7 +23,10 @@ async function removeMovie(movieId) {
 }
 
 async function findMovieByName(query) {
-  return this.find({ movieName: query });
+  const allMovie = await this.find({});
+  return allMovie.filter(
+    (item) => item.movieName.toLowerCase() === query.toLowerCase()
+  );
 }
 
 async function findByActorName(queryName) {
