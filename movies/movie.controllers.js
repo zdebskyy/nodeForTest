@@ -50,13 +50,15 @@ class MovieControllers {
   async getUploadedData(req, res) {
     console.log(req.file);
 
+    let films;
+
     await fs.readFile(req.file.path, "utf8", function (err, contents) {
       if (err) throw err;
       const items = contents.split("\n").map(function (el) {
         return el.split(/\s+/);
       });
 
-      const films = items.map((item) => {
+      films = items.map((item) => {
         const FORMAT = "Format";
         const itemTitle = item[0];
         if (itemTitle === FORMAT) {
