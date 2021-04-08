@@ -10,6 +10,7 @@ const fs = require("fs");
 class MovieControllers {
   async addMovie(req, res) {
     const { movieName, productionDate, format, actorsList } = req.body;
+
     const newMovie = new movieModel({
       movieName,
       productionDate,
