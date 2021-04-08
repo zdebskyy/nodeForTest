@@ -38,8 +38,8 @@ module.exports = class movieServer {
   initMiddlwares() {
     this.server.use(express.json());
     this.server.use(morgan("dev"));
+    this.server.use(cors());
     console.log("middlewares initialized");
-    this.server.use(cors({}));
   }
 
   errorHandling() {
@@ -48,6 +48,7 @@ module.exports = class movieServer {
       if (error instanceof NotFoundError) {
         status = error.status;
       }
+      console.log(error.message);
       return res.status(status).send({ message: error.message });
     });
   }

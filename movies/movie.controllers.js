@@ -2,11 +2,6 @@ const movieModel = require("./movie.model");
 const { NotFoundError } = require("../utils/errorHandler");
 const fs = require("fs");
 
-// fs.readFile("uploads/1617810513461.txt", "utf8", function (err, contents) {
-//   if (err) throw err;
-//   console.log(contents.split("-"));
-// });
-
 class MovieControllers {
   async addMovie(req, res) {
     const { movieName, productionDate, format, actorsList } = req.body;
@@ -55,7 +50,24 @@ class MovieControllers {
   async getUploadedData(req, res) {
     console.log(req.file);
 
-    res.status(200).json({ message: "OK" });
+    await fs.readFile(req.file.path, "utf8", function (err, contents) {
+      if (err) throw err;
+      const items = contents.split("\n").map(function (el) {
+        return el.split(/\s+/);
+      });
+
+      const films = items.map((item) => {
+        const FORMAT = "Format";
+        const itemTitle = item[0];
+        if (itemTitle === FORMAT) {
+        }
+        const itemValue = item.slice(1);
+        return { [itemTitle]: itemValue };
+      });
+
+      console.log(films);
+    });
+    res.status(200).json(films);
   }
 
   async allData(req, res) {
