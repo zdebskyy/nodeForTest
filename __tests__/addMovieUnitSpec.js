@@ -9,13 +9,14 @@ describe("addMovie", () => {
         name: "Data",
       },
     };
-    const mRes = { json: jest.fn() };
+    const mRes = { json: jest.fn(), status: jest.fn() };
 
     await getByName(mReq, mRes);
 
     expect(mRes.json).toBeCalledWith({
       result,
     });
+    expect(mRes.status).toBeCalledWith(200);
 
     done();
   }, 30000);
@@ -39,27 +40,6 @@ describe("addMovie", () => {
 
 //     expect(mRes.json).toBeCalledWith({
 //       newMovie,
-//     });
-
-//     done();
-//   }, 30000);
-// });
-
-// describe("searchByName", () => {
-//   it("find all realated movies in collection", async (done) => {
-//     // expect(1).toBe(1);
-
-//     const mReq = {
-//       params: {
-//         name: "Data",
-//       },
-//     };
-//     const mRes = { json: jest.fn() };
-
-//     await getByName(mReq, mRes);
-
-//     expect(mRes.json).toBeCalledWith({
-//       result,
 //     });
 
 //     done();
