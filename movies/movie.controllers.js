@@ -1,6 +1,6 @@
 const movieModel = require("./movie.model");
 const { NotFoundError } = require("../utils/errorHandler");
-const fs = require("fs");
+const { promises: fs } = require("fs");
 
 class MovieControllers {
   async addMovie(req, res) {
