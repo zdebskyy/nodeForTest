@@ -48,7 +48,7 @@ module.exports = class movieServer {
       if (error instanceof NotFoundError) {
         status = error.status;
       }
-      console.log(error.message);
+
       return res.status(status).send({ message: error.message });
     });
   }
