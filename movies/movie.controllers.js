@@ -1,6 +1,27 @@
 const movieModel = require("./movie.model");
 const { NotFoundError } = require("../utils/errorHandler");
 const fs = require("fs");
+const readline = require("readline");
+
+async function processLineByLine(file) {
+  const fileStream = fs.createReadStream(file);
+
+  const rl = readline.createInterface({
+    input: fileStream,
+    crlfDelay: Infinity,
+  });
+
+  let arr = [];
+  for await (const line of rl) {
+    const data = line.split(" ");
+
+    const obj = {
+      [data[0]]: data.slice(1),
+    };
+    arr.push(obj);
+    console.log(arr);
+  }
+}
 
 class MovieControllers {
   async addMovie(req, res) {
@@ -48,7 +69,8 @@ class MovieControllers {
   }
 
   async getUploadedData(req, res) {
-    console.log(req.file);
+    // console.log(req.file);
+    processLineByLine(req.file.path);
 
     let films;
 
@@ -67,7 +89,7 @@ class MovieControllers {
         return { [itemTitle]: itemValue };
       });
 
-      console.log(films);
+      // console.log(films);
     });
     res.status(200).json(films);
   }
