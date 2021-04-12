@@ -3,7 +3,7 @@ const Joi = require("joi");
 function validateMovieAdd(req, res, next) {
   const schema = Joi.object({
     movieName: Joi.string().min(3).required(),
-    productionDate: Joi.number().required(),
+    productionDate: Joi.number().min(1850).max(2021).required(),
     format: Joi.string().required(),
     actorsList: Joi.array()
       .items({

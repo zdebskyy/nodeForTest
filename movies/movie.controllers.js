@@ -1,5 +1,5 @@
 const movieModel = require("./movie.model");
-const { NotFoundError } = require("../utils/errorHandler");
+const { NotFoundError, ConflictError } = require("../utils/errorHandler");
 const fs = require("fs");
 const readline = require("readline");
 
@@ -19,7 +19,7 @@ async function processLineByLine(file) {
       [data[0]]: data.slice(1),
     };
     arr.push(obj);
-    console.log(arr);
+    // console.log(arr);
   }
 }
 
@@ -34,8 +34,11 @@ class MovieControllers {
       actorsList,
     });
 
+    const check = await movieModel.movieCheck(movieName, productionDate);
+    if (check.length > 0) {
+      throw new ConflictError("Cannot add same movie");
+    }
     await newMovie.save();
-
     res.status(201).json(newMovie);
   }
 

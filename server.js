@@ -4,7 +4,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const movieRouter = require("./movies/movies.router");
-const { NotFoundError } = require("./utils/errorHandler");
+const { NotFoundError, ConflictError } = require("./utils/errorHandler");
 
 const port = process.env.PORT || 3001;
 const url = process.env.MONGO_URL;
@@ -45,7 +45,7 @@ module.exports = class movieServer {
   errorHandling() {
     let status = 500;
     this.server.use((error, req, res, next) => {
-      if (error instanceof NotFoundError) {
+      if (error instanceof NotFoundError || ConflictError) {
         status = error.status;
       }
 
