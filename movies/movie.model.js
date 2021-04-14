@@ -50,10 +50,16 @@ async function sortByMovieName() {
   return allMovie.sort(function (a, b) {
     const nameA = a.movieName.toUpperCase();
     const nameB = b.movieName.toUpperCase();
-    if (nameA < nameB) {
+    if (
+      nameA.localeCompare(nameB, "UA", { sensitivity: "base" }) <
+      nameB.localeCompare(nameB, "UA", { sensitivity: "base" })
+    ) {
       return -1;
     }
-    if (nameA > nameB) {
+    if (
+      nameA.localeCompare(nameB, "UA", { sensitivity: "base" }) >
+      nameB.localeCompare(nameB, "UA", { sensitivity: "base" })
+    ) {
       return 1;
     }
     return 0;
