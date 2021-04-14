@@ -52,13 +52,13 @@ async function sortByMovieName() {
     const nameB = b.movieName.toUpperCase();
     if (
       nameA.localeCompare(nameB, "UA", { sensitivity: "base" }) <
-      nameB.localeCompare(nameB, "UA", { sensitivity: "base" })
+      nameB.localeCompare(nameA, "UA", { sensitivity: "base" })
     ) {
       return -1;
     }
     if (
       nameA.localeCompare(nameB, "UA", { sensitivity: "base" }) >
-      nameB.localeCompare(nameB, "UA", { sensitivity: "base" })
+      nameB.localeCompare(nameA, "UA", { sensitivity: "base" })
     ) {
       return 1;
     }
