@@ -66,8 +66,9 @@ class MovieControllers {
     res.status(200).json(result);
   }
 
-  async getSorted(_, res) {
-    const result = await movieModel.sortByMovieName();
+  async getSorted(req, res) {
+    const { sort } = req.params;
+    const result = await movieModel.sortByMovieName(sort);
     res.status(200).json(result);
   }
 

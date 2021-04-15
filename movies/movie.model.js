@@ -45,25 +45,46 @@ async function findByActorName(queryName) {
   });
 }
 
-async function sortByMovieName() {
+async function sortByMovieName(sort) {
   const allMovie = await this.find({});
-  return allMovie.sort(function (a, b) {
-    const nameA = a.movieName.toUpperCase();
-    const nameB = b.movieName.toUpperCase();
-    if (
-      nameA.localeCompare(nameB, "UA", { sensitivity: "base" }) <
-      nameB.localeCompare(nameA, "UA", { sensitivity: "base" })
-    ) {
-      return -1;
-    }
-    if (
-      nameA.localeCompare(nameB, "UA", { sensitivity: "base" }) >
-      nameB.localeCompare(nameA, "UA", { sensitivity: "base" })
-    ) {
-      return 1;
-    }
-    return 0;
-  });
+  if (sort === "A-Z") {
+    return allMovie.sort(function (a, b) {
+      const nameA = a.movieName.toUpperCase();
+      const nameB = b.movieName.toUpperCase();
+      if (
+        nameA.localeCompare(nameB, "UA", { sensitivity: "base" }) <
+        nameB.localeCompare(nameA, "UA", { sensitivity: "base" })
+      ) {
+        return -1;
+      }
+      if (
+        nameA.localeCompare(nameB, "UA", { sensitivity: "base" }) >
+        nameB.localeCompare(nameA, "UA", { sensitivity: "base" })
+      ) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+  if (sort === "Z-A") {
+    return allMovie.sort(function (a, b) {
+      const nameA = a.movieName.toUpperCase();
+      const nameB = b.movieName.toUpperCase();
+      if (
+        nameA.localeCompare(nameB, "UA", { sensitivity: "base" }) >
+        nameB.localeCompare(nameA, "UA", { sensitivity: "base" })
+      ) {
+        return -1;
+      }
+      if (
+        nameA.localeCompare(nameB, "UA", { sensitivity: "base" }) <
+        nameB.localeCompare(nameA, "UA", { sensitivity: "base" })
+      ) {
+        return 1;
+      }
+      return 0;
+    });
+  }
 }
 
 const movieModel = mongoose.model("Movie", movieSchema);

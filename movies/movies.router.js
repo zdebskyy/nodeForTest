@@ -31,7 +31,7 @@ movieRouter.delete(
   asyncWrapper(removeMovieFromCollection)
 );
 movieRouter.get("/", asyncWrapper(allData));
-movieRouter.get("/sort-by-name", asyncWrapper(getSorted));
+movieRouter.get("/sort-by-name/:sort", asyncWrapper(getSorted));
 movieRouter.get("/find-by-name/:name", asyncWrapper(getByName));
 movieRouter.get("/find-by-actor/:name", asyncWrapper(getByActorName));
 movieRouter.post("/upload", upload.single("file"), getUploadedData);
